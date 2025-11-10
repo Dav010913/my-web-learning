@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>事件处理练习</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            margin: 10px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            background-color: #007bff;
+            color: white;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .box {
+            padding: 20px;
+            border: 2px solid #ccc;
+            margin: 20px 0;
+            transition: all 0.3s;
+        }
+        input {
+            padding: 10px;
+            font-size: 16px;
+            margin: 10px 0;
+            width: 300px;
+        }
+    </style>
+</head>
+<body>
+    <h1>事件处理练习</h1>
+
+    <h2>1. 点击事件</h2>
+    <button id="btn1">点我！</button>
+    <p id="result1"></p>
+
+    <h2>2. 改变颜色</h2>
+    <button id="btn-red">红色</button>
+    <button id="btn-green">绿色</button>
+    <button id="btn-blue">蓝色</button>
+    <div class="box" id="color-box">我的背景会变色</div>
+
+    <h2>3. 输入事件</h2>
+    <input type="text" id="text-input" placeholder="输入点什么...">
+    <p id="result2"></p>
+
+    <h2>4. 计数器</h2>
+    <button id="btn-increase">增加</button>
+    <button id="btn-decrease">减少</button>
+    <button id="btn-reset">重置</button>
+    <p>当前数字：<span id="counter">0</span></p>
+
+    <script>
+        // JavaScript代码写在这里
+        // 1. 简单的点击事件
+        let btn1 = document.getElementById("btn1");
+        let result1 = document.getElementById("result1");
+
+        btn1.addEventListener("click", function() {
+            result1.textContent = "你点击了按钮！时间：" + new Date().toLocaleTimeString();
+        });
+        // 2. 改变颜色
+        let btnRed = document.getElementById("btn-red");
+        let btnGreen = document.getElementById("btn-green");
+        let btnBlue = document.getElementById("btn-blue");
+        let colorBox = document.getElementById("color-box");
+
+        btnRed.addEventListener("click", function() {
+            colorBox.style.backgroundColor = "red";
+        });
+
+        btnGreen.addEventListener("click", function() {
+            colorBox.style.backgroundColor = "green";
+        });
+
+        btnBlue.addEventListener("click", function() {
+            colorBox.style.backgroundColor = "blue";
+        });
+        // 3. 输入事件 - 实时显示输入内容
+        let textInput = document.getElementById("text-input");
+        let result2 = document.getElementById("result2");
+
+        textInput.addEventListener("input", function() {
+            result2.textContent = "你输入了：" + textInput.value;
+        });
+        // 4. 计数器
+        let counter = 0;
+        let counterDisplay = document.getElementById("counter");
+        let btnIncrease = document.getElementById("btn-increase");
+        let btnDecrease = document.getElementById("btn-decrease");
+        let btnReset = document.getElementById("btn-reset");
+
+        btnIncrease.addEventListener("click", function() {
+            counter++;
+            counterDisplay.textContent = counter;
+        });
+
+        btnDecrease.addEventListener("click", function() {
+            counter--;
+            counterDisplay.textContent = counter;
+        });
+
+        btnReset.addEventListener("click", function() {
+            counter = 0;
+            counterDisplay.textContent = counter;
+        });
+    </script>
+</body>
+</html>

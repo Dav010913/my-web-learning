@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>我的待办事项</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(140deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 50px 20px;
+        }
+        
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 30px;
+        }
+        
+        .input-section {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+        }
+        
+        input[type="text"] {
+            flex: 1;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        
+        button {
+            padding: 12px 24px;
+            background-color: #667eea;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+        
+        button:hover {
+            background-color: #5568d3;
+        }
+        
+        .todo-list {
+            list-style: none;
+        }
+        
+        .todo-item {
+            background: #f8f9fa;
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s;
+        }
+        
+        .todo-item:hover {
+            background: #e9ecef;
+            transform: translateX(5px);
+        }
+        
+        .todo-item.completed {
+            opacity: 0.6;
+            text-decoration: line-through;
+        }
+        
+        .todo-text {
+            flex: 1;
+            cursor: pointer;
+        }
+        
+        .delete-btn {
+            background-color: #dc3545;
+            padding: 8px 16px;
+            font-size: 14px;
+        }
+        
+        .delete-btn:hover {
+            background-color: #c82333;
+        }
+        
+        .empty-message {
+            text-align: center;
+            color: #999;
+            padding: 40px;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📝 我的待办事项</h1>
+        
+        <div class="input-section">
+            <input type="text" id="todo-input" placeholder="输入新的待办事项...">
+            <button id="add-btn">添加</button>
+        </div>
+        
+        <ul class="todo-list" id="todo-list">
+            <li class="empty-message">还没有待办事项，添加一个吧！</li>
+            <li class="empty-message">增加一行。</li>
+        </ul>
+    </div>
+
+    <script>
+        // 获取元素
+        let todoInput = document.getElementById("todo-input");
+        let addBtn = document.getElementById("add-btn");
+        let todoList = document.getElementById("todo-list");
+
+        // 添加待办事项
+        function addTodo() {
+            let todoText = todoInput.value.trim();  // trim()去掉前后空格
+            
+            // 检查是否为空
+            if (todoText === "") {
+                alert("请输入待办事项！");
+                return;
+            }
+            
+            // 清空空消息
+            if (todoList.querySelector(".empty-message")) {
+                todoList.innerHTML = "";
+            }
+            
+            // 创建新的待办项
+            let li = document.createElement("li");
+            li.className = "todo-item";
+            
+            let span = document.createElement("span");
+            span.className = "todo-text";
+            span.textContent = todoText;
+            
+            // 点击文字标记完成
+            span.addEventListener("click", function() {
+                li.classList.toggle("completed");
+            });
+            
+            // 创建删除按钮
+            let deleteBtn = document.createElement("button");
+            deleteBtn.className = "delete-btn";
+            deleteBtn.textContent = "删除";
+            deleteBtn.addEventListener("click", function() {
+                li.remove();
+                
+                // 如果列表为空，显示空消息
+                if (todoList.children.length === 0) {
+                    todoList.innerHTML = '<li class="empty-message">还没有待办事项，添加一个吧！</li>';
+                }
+            });
+            
+            // 组装元素
+            li.appendChild(span);
+            li.appendChild(deleteBtn);
+            todoList.appendChild(li);
+            
+            // 清空输入框
+            todoInput.value = "";
+            todoInput.focus();  // 让输入框重新获得焦点
+        }
+
+        // 点击按钮添加
+        addBtn.addEventListener("click", addTodo);
+
+        // 按回车键添加
+        todoInput.addEventListener("keypress", function(event) {
+            if (event.key === "Enter") {
+                addTodo();
+            }
+        });
+    </script>
+</body>
+</html>

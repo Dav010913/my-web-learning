@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM练习</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+        }
+        .box {
+            padding: 20px;
+            border: 2px solid #333;
+            margin: 20px 0;
+        }
+        .highlight {
+            background-color: yellow;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1 id="main-title">DOM操作练习</h1>
+    <p class="intro">这是一段介绍文字</p>
+    
+    <div class="box">
+        <h2>这是一个盒子</h2>
+        <p>盒子里的内容</p>
+    </div>
+
+    <script>
+        // JavaScript代码写在这里
+        // 选择id为main-title的元素
+        let title = document.getElementById("main-title");
+        intro.textContent = "这段文字被JavaScript改掉了";
+        console.log(title);  
+        // 选择class为intro的元素
+        let intro = document.querySelector(".intro");
+
+        intro.textContent = "尝试修改";
+        console.log(intro);
+        // 选择所有的p标签
+        let allParagraphs = document.querySelectorAll("p");
+        console.log(allParagraphs);  // 会显示一个列表
+        console.log("页面加载完成！");
+    </script>
+</body>
+</html>
